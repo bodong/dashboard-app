@@ -68,21 +68,8 @@
 <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
 <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
 <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
+<script th:src="@{/custom.js}" src="../static/custom.js"></script>
 
-<script>
-    $('#exampleModal1').on('show.bs.modal', function () {
-        $.get("/modals/modal1", function (data) {
-            $('#exampleModal1').find('.modal-body').html(data);
-        })
-    });
-
-    $('#exampleModal2').on('show.bs.modal', function () {
-        var productId = prompt("Enter product id", "1");
-        $.get("/modals/modal2?id=" + productId, function (data) {
-            $('#exampleModal2').find('.modal-body').html(data);
-        })
-    })
-</script>
 
 </body>
 </html>
