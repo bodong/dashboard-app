@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
-    <title>Dashboard App</title>
+    <title th:text="${title}">Dashboard App</title>
 
     <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/4.0.0-2/css/bootstrap.min.css} "/>
 </head>
@@ -39,6 +39,9 @@
 </nav>
 
 <div class="container">
+    <div class="row mt-2">
+        <label th:text="${welcome}"></label>
+    </div>
     <div class="row mt-5">
         <div class="col">
             <!-- Button trigger modal -->

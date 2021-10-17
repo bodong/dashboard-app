@@ -1,5 +1,6 @@
 package xyz.pakwo.dashboard.controller;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import xyz.pakwo.dashboard.service.ProductService;
  **/
 @Controller
 @RequestMapping("modals")
+@Slf4j
 public class ModalController {
 
     @Autowired
@@ -21,6 +23,7 @@ public class ModalController {
 
     @GetMapping("modal1")
     public String modal1(Model model) {
+        log.info("Retrieving list of product");
         model.addAttribute("products", productService.getProducts());
 
         return "modal1";
@@ -28,7 +31,7 @@ public class ModalController {
 
     @GetMapping("modal2")
     public String modal2(@RequestParam("id") Long id, Model model) {
-
+        log.info("Getting product for id {}", id);
         ProductDto product = productService.getById(id);
         model.addAttribute("product", product);
         return "modal2";
