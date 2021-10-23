@@ -23,8 +23,8 @@ public class ModalController {
 
     @GetMapping("modal1")
     public String modal1(Model model) {
-        log.info("Retrieving list of product");
-        model.addAttribute("products", productService.getProducts());
+        log.info("Retrieving matrix");
+        model.addAttribute("matrix", productService.getMatrix());
 
         return "modal1";
     }

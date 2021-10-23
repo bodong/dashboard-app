@@ -2,17 +2,14 @@
 <table class="table table-striped">
     <thead>
     <tr>
-        <th scope="col"> Product Code </th>
-        <th scope="col"> Product Description </th>
+        <th scope="col"> Key </th>
+        <th scope="col"> Value </th>
     </tr>
     </thead>
     <tbody>
-    <tr th:if="${products.empty}">
-        <td scope="row" colspan="2"> No Product Available </td>
-    </tr>
-    <tr th:each="product : ${products}">
-        <td scope="row"><span th:text="${product.code}"> Product Code </span></td>
-        <td scope="row"><span th:text="${product.description}"> Product Description </span></td>
+    <tr th:each="product : ${matrix}">
+        <td scope="row"><span th:text="${product.key}"> Key </span></td>
+        <td scope="row"><span th:text="${product.value}"> Value </span></td>
     </tr>
     </tbody>
 </table>
