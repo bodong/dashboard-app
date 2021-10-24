@@ -2,36 +2,70 @@ package xyz.pakwo.dashboard.controller;
 
 import org.openjdk.jol.info.GraphLayout;
 
+import java.lang.reflect.Field;
 import java.text.CharacterIterator;
 import java.text.StringCharacterIterator;
+import java.util.ArrayList;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 /** @author sarwo.wibowo */
 public class SimpleTest {
   public static void main(String[] args) {
-    Map<String, Object> data = new ConcurrentHashMap<>();
-    data.put("test", 123232);
-    data.put("test2", "Some data");
 
-    long size = GraphLayout.parseInstance(data).totalSize();
-    System.out.println("total size : " + size);
+      ConcurrentHashMap<String, Object> data = new ConcurrentHashMap<>();
+      data.put("somekey", getBiggerData(1000));
 
-    data.put("test3", "Some data again lorem ipsum asdsds ");
-    size = GraphLayout.parseInstance(data).totalSize();
+      simpleTest(data);
 
-    System.out.println("total size again : " + size);
+      long size = GraphLayout.parseInstance(data).totalSize();
+      System.out.println("jol : " + size + " bytes");
 
-    data.put("test4", getBiggerData(1000));
 
-    size = GraphLayout.parseInstance(data).totalSize();
-
-    System.out.println("total size last : " + size);
-
-    System.out.println("total size last (human readable) : " + formatSize(size));
+//      usingJol();
   }
 
-  private static String getBiggerData(int max) {
+    private static void usingJol() {
+        Map<String, Object> data = new ConcurrentHashMap<>();
+        data.put("test", 123232);
+        data.put("test2", "Some data");
+
+        long size = GraphLayout.parseInstance(data).totalSize();
+        System.out.println("total size : " + size);
+
+        data.put("test3", "Some data again lorem ipsum asdsds ");
+        size = GraphLayout.parseInstance(data).totalSize();
+
+        System.out.println("total size again : " + size);
+
+        data.put("test4", getBiggerData(1000));
+
+        size = GraphLayout.parseInstance(data).totalSize();
+
+        System.out.println("total size last : " + size);
+
+        System.out.println("total size last (human readable) : " + formatSize(size));
+    }
+
+    private static void simpleTest(ConcurrentHashMap<String, Object> data) {
+
+        try{
+
+            Field f = ConcurrentHashMap.class.getDeclaredField("sizeCtl");
+            f.setAccessible(true);
+            Integer capacity =  (Integer) f.get(data);
+            System.out.println("capacity code : " + capacity);
+
+
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+
+
+
+    }
+
+    private static String getBiggerData(int max) {
     String str = "";
     for (int i = 0; i < max; i++) {
       str += "Lorem ipsum again again again";

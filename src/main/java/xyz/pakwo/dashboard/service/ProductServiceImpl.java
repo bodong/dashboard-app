@@ -53,7 +53,7 @@ public class ProductServiceImpl implements ProductService {
     Map<String, Object> data = new ConcurrentHashMap<>();
 
     String str = "";
-    for (int i = 0; i < 1000; i++) {
+    for (int i = 0; i < 100000; i++) {
       str += "Lorem ipsum again again again";
     }
     data.put("msg1", str);
